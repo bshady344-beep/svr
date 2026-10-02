@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>أكاديمية السادات - محرم بك</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body, html {
+      width: 100%;
+      height: 100%;
+      color: #fff;
+      overflow-x: hidden;
+      background-image: url('rr.png');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+      background-color: #0f172a;
+    }
+
+    .screen-frame {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      border: 10px solid rgba(59, 130, 246, 0.4);
+      box-shadow: inset 0 0 20px rgba(0, 0, 0, 0.7);
+      pointer-events: none; 
+      z-index: 9999;
+    }
+
+   
+    .screen-frame::before {
+      content: '';
+      position: absolute;
+      top: -2px;
+      right: -2px;
+      width: 35px;
+      height: 35px;
+      border-top: 4px solid #60a5fa;
+      border-right: 4px solid #60a5fa;
+    }
+
+    .screen-frame::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: -2px;
+      width: 35px;
+      height: 35px;
+      border-bottom: 4px solid #60a5fa;
+      border-left: 4px solid #60a5fa;
+    }
+
+    .welcome-section {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 20px;
+      background: rgba(15, 23, 42, 0.45);
+      text-align: center;
+    }
+
+    .welcome-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 24px;
+      padding: 50px 40px;
+      max-width: 650px;
+      width: 100%;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+      animation: fadeIn 0.8s ease-in-out;
+    }
+
+    .welcome-title {
+      font-size: 2.3rem;
+      color: #60a5fa;
+      margin-bottom: 15px;
+    }
+
+    .welcome-sub {
+      font-size: 1.2rem;
+      color: #cbd5e1;
+      margin-bottom: 30px;
+      line-height: 1.6;
+    }
+
+    .hero-container {
+      position: relative;
+      width: 100vw;
+      height: 100vh;
+    }
+
+    .content-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to top, rgba(15, 23, 42, 0.85) 10%, transparent 80%);
+      display: flex;
+      align-items: flex-end;
+      padding: 50px;
+    }
+
+    .card {
+      background: rgba(15, 23, 42, 0.65);
+      backdrop-filter: blur(15px);
+      -webkit-backdrop-filter: blur(15px);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      padding: 30px;
+      border-radius: 20px;
+      max-width: 550px;
+      transition: opacity 0.5s ease;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+    }
+
+    .badge {
+      background: #2563eb;
+      padding: 5px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      display: inline-block;
+      margin-bottom: 12px;
+      font-weight: bold;
+    }
+
+    h1 {
+      margin-bottom: 12px;
+      font-size: 1.8rem;
+    }
+
+    p {
+      font-size: 1rem;
+      line-height: 1.6;
+      color: #cbd5e1;
+      margin-bottom: 24px;
+    }
+
+    .btn-main {
+      background: #2563eb;
+      color: white;
+      border: none;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+
+    .btn-main:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(37, 99, 235, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      color: #fff;
+      padding: 14px 28px;
+      border-radius: 12px;
+      font-size: 1rem;
+      cursor: pointer;
+      margin-top: 15px;
+      transition: all 0.3s ease;
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .quiz-section {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      background: rgba(15, 23, 42, 0.5);
+    }
+
+    .quiz-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 40px;
+      width: 100%;
+      max-width: 700px;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    }
+
+    .progress-bar-container {
+      width: 100%;
+      height: 8px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      margin-bottom: 25px;
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #3b82f6, #60a5fa);
+      transition: width 0.4s ease;
+    }
+
+    .question-count {
+      color: #60a5fa;
+      font-size: 0.9rem;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .question-title {
+      font-size: 1.4rem;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+
+    .options-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .option-btn {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: #f1f5f9;
+      padding: 16px 20px;
+      border-radius: 14px;
+      text-align: right;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .option-btn:hover {
+      background: rgba(59, 130, 246, 0.3);
+      border-color: #3b82f6;
+      transform: translateX(-5px);
+    }
+
+    .result-box {
+      text-align: center;
+    }
+
+    .result-icon {
+      font-size: 3.5rem;
+      margin-bottom: 15px;
+    }
+
+    .result-title {
+      color: #60a5fa;
+      font-size: 2rem;
+      margin-bottom: 15px;
+    }
+
+    .result-desc {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      color: #cbd5e1;
+      margin-bottom: 25px;
+    }
+
+    .closing-section {
+      min-height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 40px 20px;
+      background: rgba(15, 23, 42, 0.5);
+      text-align: center;
+    }
+
+    .closing-card {
+      background: rgba(15, 23, 42, 0.75);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 24px;
+      padding: 50px 30px;
+      max-width: 650px;
+      width: 100%;
+      box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.6);
+    }
+
+    .closing-title {
+      font-size: 2.2rem;
+      color: #60a5fa;
+      margin-bottom: 20px;
+    }
+
+    .closing-text {
+      font-size: 1.2rem;
+      line-height: 1.8;
+      color: #e2e8f0;
+      margin-bottom: 30px;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .screen-frame { border-width: 6px; }
+      .welcome-card { padding: 35px 20px; }
+      .welcome-title { font-size: 1.8rem; }
+      .content-overlay { padding: 25px; }
+      .card { max-width: 100%; }
+      .quiz-card { padding: 25px; }
+      .question-title { font-size: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="screen-frame"></div>
+
+  <section class="welcome-section" id="welcome-section">
+    <div class="welcome-card">
+      <h1 class="welcome-title">أهلاً بك في أكاديمية السادات</h1>
+      <p class="welcome-sub">فرع محرم بك - الإسكندرية<br>رحلتك لاكتشاف المستقبل تبدأ من هنا.</p>
+      <button class="btn-main" onclick="startTour()">اضغط لتعرف أكثر ➔</button>
+    </div>
+  </section>
+
+  <section class="hero-container hidden" id="hero-section">
+    <div class="content-overlay">
+      <div class="card" id="infoCard">
+        <span class="badge" id="stepBadge">المحطة 1</span>
+        <h1 id="title">نشأة فرع محرم بك</h1>
+        <p id="description">
+          تعد أكاديمية السادات للعلوم الإدارية بفرع محرم بك بالإسكندرية من أعرق الصروح التعليمية المتخصصة في إعداد القادة والمديرين في مجالات الإدارة والتكنولوجيا.
+        </p>
+        <button class="btn-main" id="nextBtn" onclick="nextStep()">ادخل الساحة الرئيسية ➔</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="quiz-section hidden" id="quiz-section">
+    <div class="quiz-card">
+      
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+
+      <div id="questionContainer">
+        <div class="question-count" id="questionCounter">جاري التحميل...</div>
+        <h2 class="question-title" id="questionText">جاري تحميل السؤال...</h2>
+        <div class="options-grid" id="optionsGrid"></div>
+      </div>
+
+      <div id="resultContainer" class="result-box hidden">
+        <div class="result-icon">🎓</div>
+        <span>المسار الأكثر ملاءمة لشغفك هو:</span>
+        <h1 class="result-title" id="resultTitle"></h1>
+        <p class="result-desc" id="resultDesc"></p>
+        
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <button class="btn-main" onclick="goToClosingPage()">الانتقال إلى الكلمة الختامية ➔</button>
+          <button class="btn-secondary" onclick="restartQuiz()">إعادة اختبار المسار 🔄</button>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="closing-section hidden" id="closing-section">
+    <div class="closing-card">
+      <h1 class="closing-title">من ....</h1>
+      <div class="closing-text" id="closingMessage">
+        <h2>sVr</h2>
+        <h4>shVdoz</h4>
+      </div>
+      <button class="btn-main" onclick="restartAll()">البدء من الجديد 🔄</button>
+    </div>
+  </section>
+
+  <script>
+    const steps = [
+      {
+        badge: "المحطة 1",
+        title: "نشأة فرع محرم بك",
+        desc: "تعد أكاديمية السادات بفرع محرم بك من الصروح التعليمية العريقة في الإسكندرية والمتخصصة في العلوم الإدارية والتكنولوجية.",
+        btnText: "ادخل الساحة الرئيسية ➔"
+      },
+      {
+        badge: "المحطة 2",
+        title: "الساحة وقاعات الدراسة",
+        desc: "تتميز الكلية بيئة تعليمية متطورة مجهزة بأحدث المدرجات والقاعات الذكية المخصصة لتطوير مهارات الطلاب.",
+        btnText: "استكشف المكتبة والمعامل ➔"
+      },
+      {
+        badge: "المحطة 3",
+        title: "المكتبة والمعامل الرقمية",
+        desc: "تضم الأكاديمية مكتبة شاملة وأحدث معامل الحواسب الآلية. هل أنت جاهز الآن لاكتشاف تخصصك المناسب؟",
+        btnText: "ابدأ اختبار تحديد المسار 🎯"
+      }
+    ];
+
+    let currentStep = 0;
+
+    // دالة تخطي الصفحة الترحيبية والدخول للمعلومات
+    function startTour() {
+      document.getElementById("welcome-section").classList.add("hidden");
+      document.getElementById("hero-section").classList.remove("hidden");
+    }
+
+    function nextStep() {
+      const infoCard = document.getElementById("infoCard");
+      infoCard.style.opacity = "0";
+
+      setTimeout(() => {
+        currentStep++;
+        
+        if (currentStep >= steps.length) {
+          document.getElementById("hero-section").classList.add("hidden");
+          document.getElementById("quiz-section").classList.remove("hidden");
+          startQuiz();
+          return;
+        }
+
+        const step = steps[currentStep];
+        document.getElementById("stepBadge").innerText = step.badge;
+        document.getElementById("title").innerText = step.title;
+        document.getElementById("description").innerText = step.desc;
+        document.getElementById("nextBtn").innerText = step.btnText;
+
+        infoCard.style.opacity = "1";
+      }, 500);
+    }
+
+    const rawQuizQuestions = [
+      {
+        question: "1. عندما تُعرض عليك مشكلة معقدة في شركة، ما هو رد فعلك الأول؟",
+        options: [
+          { text: "أحلل البرمجيات والنظم الرقمية المستخدمة وكيفية تطويرها لربط الأقسام.", track: "mis" },
+          { text: "أُوزع المهام على الفريق وأقود عملية اتخاذ القرار والتنسيق بين الأفراد.", track: "management" },
+          { text: "أحسب التكلفة المادية والأرباح والميزانية المتاحة لتفادي أي خسائر.", track: "finance" }
+        ]
+      },
+      {
+        question: "2. ما هي مهاراتك الشخصية الأساسية التي تفضل استخدامها يومياً؟",
+        options: [
+          { text: "التعامل مع التكنولوجيا والتحليل الرقمي وقواعد البيانات والبرمجة.", track: "mis" },
+          { text: "التواصل، التأثير في الآخرين، التخطيط الاستراتيجي، والتسويق.", track: "management" },
+          { text: "التعامل مع الأرقام، تحليل الأسواق، وقراءة المؤشرات الاقتصادية.", track: "finance" }
+        ]
+      },
+      {
+        question: "3. ما هو المسمى الوظيفي الذي تطمح للوصول إليه بعد التخرج؟",
+        options: [
+          { text: "محلل نظم ومعلومات (System Analyst) أو مدير تكنولوجيا معلومات (IT Manager).", track: "mis" },
+          { text: "مدير شركة (CEO)، رائد أعمال صاحب مشروع، أو مسؤول تسويق وتطوير أعمال.", track: "management" },
+          { text: "محلل مالي، مدير استثمار، أو أخصائي بالبنوك والبورصة.", track: "finance" }
+        ]
+      },
+      {
+        question: "4. في المشاريع والأنشطة الطلابية، ما الدور الذي يستهويك أكثر؟",
+        options: [
+          { text: "بناء التطبيقات والمواقع والتصميم الرقمي والدعم التكنولوجي.", track: "mis" },
+          { text: "إدارة الفعاليات والتحدث أمام الجماهير وإعداد خطط العمل (Business Plan).", track: "management" },
+          { text: "إدارة الميزانية والرعاية التمويلية (Sponsorship) وتدقيق المصروفات.", track: "finance" }
+        ]
+      },
+      {
+        question: "5. ما نوع المقالات والأخبار التي يثير فضولك قراءتها؟",
+        options: [
+          { text: "أخبار التكنولوجيا، الذكاء الاصطناعي، والتحول الرقمي.", track: "mis" },
+          { text: "قصص نجاح الشركات القيادية، خطط التسويق، واستراتيجيات الإدارة.", track: "management" },
+          { text: "تقارير البورصة، حركة الأسواق المالية، وأخبار الاقتصاد العالمي.", track: "finance" }
+        ]
+      },
+      {
+        question: "6. ما هي بيئة العمل التي تشعر أنك ستكون أكثر إبداعاً فيها؟",
+        options: [
+          { text: "شركات البرمجة والحلول التكنولوجية والمؤسسات الرقمية.", track: "mis" },
+          { text: "بيئة الشركات الناشئة ومراكز القيادة وتأسيس مشروعي الخاص.", track: "management" },
+          { text: "البنوك، شركات الاستثمار، والمؤسسات المحاسبية والاستشارية.", track: "finance" }
+        ]
+      },
+      {
+        question: "7. ما هي أسلوبك في اتخاذ القرارات المهمة في حياتك؟",
+        options: [
+          { text: "أعتمد على أدوات التحليل المنطقي والبيانات الدقيقة أولاً.", track: "mis" },
+          { text: "أفكر في الأهداف الشاملة وتوجيه الآخرين نحو تنفيذها بحماس.", track: "management" },
+          { text: "أقوم بالحسابات الدقيقة وموازنة الربح والخسارة والمخاطر المتوقعة.", track: "finance" }
+        ]
+      }
+    ];
+
+    let currentQuestionIndex = 0;
+    let scores = { mis: 0, management: 0, finance: 0 };
+    let shuffledQuestions = [];
+
+    function shuffleArray(array) {
+      let curId = array.length;
+      while (0 !== curId) {
+        let randId = Math.floor(Math.random() * curId);
+        curId -= 1;
+        let tmp = array[curId];
+        array[curId] = array[randId];
+        array[randId] = tmp;
+      }
+      return array;
+    }
+
+    function startQuiz() {
+      currentQuestionIndex = 0;
+      scores = { mis: 0, management: 0, finance: 0 };
+      
+      shuffledQuestions = rawQuizQuestions.map(q => {
+        return {
+          question: q.question,
+          options: shuffleArray([...q.options])
+        };
+      });
+
+      loadQuestion();
+    }
+
+    function loadQuestion() {
+      const q = shuffledQuestions[currentQuestionIndex];
+      
+      document.getElementById("questionCounter").innerText = `السؤال ${currentQuestionIndex + 1} من ${shuffledQuestions.length}`;
+      document.getElementById("progressBar").style.width = `${((currentQuestionIndex + 1) / shuffledQuestions.length) * 100}%`;
+      document.getElementById("questionText").innerText = q.question;
+
+      const grid = document.getElementById("optionsGrid");
+      grid.innerHTML = "";
+
+      q.options.forEach(opt => {
+        const btn = document.createElement("button");
+        btn.className = "option-btn";
+        btn.innerText = opt.text;
+        btn.onclick = () => selectOption(opt.track);
+        grid.appendChild(btn);
+      });
+    }
+
+    function selectOption(track) {
+      scores[track]++;
+      currentQuestionIndex++;
+
+      if (currentQuestionIndex < shuffledQuestions.length) {
+        loadQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      document.getElementById("questionContainer").classList.add("hidden");
+      document.getElementById("resultContainer").classList.remove("hidden");
+
+      let winnerTrack = Object.keys(scores).reduce((a, b) => scores[a] > scores[b] ? a : b);
+
+      const results = {
+        mis: {
+          title: "قسم نظم المعلومات الإدارية (MIS)",
+          desc: "أنت تمتلك عقلية تجمع بين قوة التكنولوجيا وذكاء الإدارة! هذا المسار يتيح لك ربط البرمجيات وتكنولوجيا المعلومات بتطوير سوق العمل والأعمال."
+        },
+        management: {
+          title: "قسم إدارة الأعمال (Business Administration)",
+          desc: "لديك مهارات قيادية وتفكير استراتيجي ممتاز! هذا المسار يضعك على أول طريق القيادة، التسويق، وإدارة المشروعات والشركات بنجاح."
+        },
+        finance: {
+          title: "قسم الاقتصاد والعلوم المالية والاستثمار",
+          desc: "شغفك ودقتك في قراءة الأرقام والبيانات يوجهك نحو هذا المسار! يفتح لك هذا التخصص أبواب البنوك، المؤسسات المالية، والبورصة."
+        }
+      };
+
+      document.getElementById("resultTitle").innerText = results[winnerTrack].title;
+      document.getElementById("resultDesc").innerText = results[winnerTrack].desc;
+    }
+
+    function restartQuiz() {
+      document.getElementById("resultContainer").classList.add("hidden");
+      document.getElementById("questionContainer").classList.remove("hidden");
+      startQuiz();
+    }
+
+    function goToClosingPage() {
+      document.getElementById("quiz-section").classList.add("hidden");
+      document.getElementById("closing-section").classList.remove("hidden");
+    }
+
+    function restartAll() {
+      currentStep = 0;
+      document.getElementById("closing-section").classList.add("hidden");
+      document.getElementById("welcome-section").classList.remove("hidden");
+      
+      const step = steps[0];
+      document.getElementById("stepBadge").innerText = step.badge;
+      document.getElementById("title").innerText = step.title;
+      document.getElementById("description").innerText = step.desc;
+      document.getElementById("nextBtn").innerText = step.btnText;
+      document.getElementById("infoCard").style.opacity = "1";
+    }
+  </script>
+
+</body>
+</html>
